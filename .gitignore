@@ -1,0 +1,6 @@
+# ignore the configuration file
+resources/config.php
+
+# ignore php composer files
+vendor/
+composer.lock
