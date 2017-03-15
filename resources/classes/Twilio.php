@@ -16,11 +16,6 @@ class Twilio
         );
     }
 
-    public function getMMS($post)
-    {
-
-    }
-
     public function delMMS($url)
     {
         // get the message and media id
@@ -33,6 +28,11 @@ class Twilio
             ->messages($msg_sid)
             ->media($media_sid)
             ->delete();
+    }
+
+    public function delSMS()
+    {
+
     }
 
     public function sendSMS()
