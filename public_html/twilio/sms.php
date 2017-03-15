@@ -21,3 +21,20 @@ if (isset($_POST['NumMedia']) && $_POST['NumMedia'] > 0) {
         $media->addMedia($_POST['From'], $_POST["MediaUrl$i"]);
     }
 }
+
+$body = $_POST['Body'];
+$regex = '/[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})/';
+
+// check if body contains email
+if (preg_match($regex, $body, $email)) {
+    $account = new Account();
+    $account->updateEmail($_POST['From'], $email);
+} else {
+    switch(strtolower($body)) {
+        case 'profile':
+            $account->updateProfile($_POST['From'], $media_sid);
+            break;
+        default:
+            // unknown command
+    }
+}
