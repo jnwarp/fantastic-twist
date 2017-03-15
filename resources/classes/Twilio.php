@@ -10,7 +10,7 @@ class Twilio
     {
         global $config;
 
-        $client = new Client(
+        $this->client = new Client(
             $config['twilio']['sid'],
             $config['twilio']['token']
         );
@@ -29,7 +29,8 @@ class Twilio
         $media_sid = $path[7];
 
         // trigger a delete of the media
-        $client->messages($msg_sid)
+        $this->client
+            ->messages($msg_sid)
             ->media($media_sid)
             ->delete();
     }
