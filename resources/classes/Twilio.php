@@ -5,6 +5,7 @@ use Twilio\Rest\Client;
 class Twilio
 {
     private $client;
+    private $replies;
 
     public function __construct()
     {
@@ -30,13 +31,26 @@ class Twilio
             ->delete();
     }
 
-    public function delSMS()
+    public function replySMS($message)
     {
-
+        $this->replies[] = $message;
     }
 
-    public function sendSMS()
+    public function postReply($message = false)
     {
+        // add an optional final message
+        if ($message !== false) {
+            $this->replySMS($message);
+        }
 
+        // create an XML body
+        $body = '<?xml version="1.0" encoding="UTF-8"?>' . "\n<Response>\n";
+        foreach ($message in $this->replies) {
+            $body = $body . "    <Message>$message</Message>\n";
+        }
+        $body = $body . "</Response>\n";
+
+        // print out the result
+        echo $body;
     }
 }

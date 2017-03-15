@@ -27,8 +27,13 @@ $regex = '/[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})/'
 
 // check if body contains email
 if (preg_match($regex, $body, $email)) {
+    // update the email account
+    $email = $email[0];
     $account = new Account();
-    $account->updateEmail($_POST['From'], $email[0]);
+    $account->updateEmail($_POST['From'], $email);
+
+    $twilio = new Twilio();
+    $twilio->postReply("Email updated to \"$email\", reply HELP for more information");
 } else {
     switch(strtolower($body)) {
         case 'profile':
