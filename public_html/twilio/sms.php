@@ -56,6 +56,8 @@ if (preg_match($regex, $body, $email)) {
             $twilio->replySMS("List of commands:\n\n? - Display help prompt\nDELETE - Deactivate account and stop recieving messages\nPROFILE - Set a profile picture by sending an image\n");
             $twilio->replySMS("Your email is currently set to \"$email\", reply with another email address to update it.");
             break;
+        case '':
+            break;
         default:
             $twilio->replySMS("Unknown command, reply ? for more info.");
     }
