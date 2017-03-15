@@ -33,7 +33,7 @@ if (preg_match($regex, $body, $email)) {
     $email = $email[0];
     $account->updateEmail($_POST['From'], $email);
 
-    $twilio->replySMS("Email updated to \"$email\", reply INFO for more information");
+    $twilio->replySMS("Email updated to \"$email\", reply ? for more information");
 } else {
     switch(strtolower($body)) {
         case 'profile':
@@ -46,11 +46,11 @@ if (preg_match($regex, $body, $email)) {
         case 'info':
             $email = $account->getEmail($_POST['From']);
 
-            $twilio->replySMS("List of commands:\nINFO - Show this prompt\nDEACTIVATE - Deactivate account and stop recieving messages\nPROFILE - Set profile picture to next image recieved\n");
+            $twilio->replySMS("List of commands:\n? - Show this prompt\nDEACTIVATE - Deactivate account and stop recieving messages\nPROFILE - Set profile picture to next image recieved\n");
             $twilio->replySMS("Your email is currently set to \"$email\", reply with another email address to update it.");
             break;
         default:
-            $twilio->replySMS("Unknown command, reply INFO for more info.");
+            $twilio->replySMS("Unknown command, reply ? for more info.");
     }
 }
 
