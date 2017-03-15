@@ -30,5 +30,7 @@ class Media
                 'type' => $type
             ]
         );
+
+        return $img_id;
     }
 }

@@ -31,16 +31,38 @@ class Account
         }
     }
 
-    public function getEmail($phone)
+    public function updateProfile($phone, $img_id)
+    {
+        $connect = new Connect();
+        if ($connect->simpleSelectCount('account', 'phone', $phone)) {
+            $connect->simpleUpdate(
+                'account',
+                'profile',
+                $img_id,
+                'phone',
+                $phone
+            );
+        } else {
+            $connect->simpleInsert(
+                'account',
+                [
+                    'phone' => $phone,
+                    'email' => '',
+                    'profile' => $img_id
+                ]
+            );
+        }
+    }
+
+    public function getInfo($phone)
     {
         $connect = new Connect();
         $results = $connect->simpleSelect(
             'account',
             'phone',
-            $phone,
-            'email'
+            $phone
         );
 
-        return $results['email'];
+        return $results;
     }
 }

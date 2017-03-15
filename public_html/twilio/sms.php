@@ -20,10 +20,11 @@ if (isset($_POST['NumMedia']) && $_POST['NumMedia'] > 0) {
 
     // add each image to database
     for ($i = 0; $i < intval($_POST['NumMedia']); $i++) {
-        $media->addMedia($_POST['From'], $_POST["MediaUrl$i"]);
+        $img_id = $media->addMedia($_POST['From'], $_POST["MediaUrl$i"]);
     }
 }
 
+$info = $account->getInfo($_POST['From']);
 $body = strtolower($_POST['Body']);
 $regex = '/[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})/';
 
@@ -37,20 +38,35 @@ if (preg_match($regex, $body, $email)) {
 } else {
     switch(strtolower($body)) {
         case 'profile':
-            $account->updateProfile($_POST['From'], $media_sid);
-            $twilio->replySMS("Your profile picture has now been updated.");
+            if (isset($img_id)) {
+                $account->updateProfile($_POST['From'], $img_id);
+                $twilio->replySMS("Your profile picture has now been updated.");
+            } else {
+                $account->updateProfile($_POST['From'], '');
+                $twilio->replySMS("The next image sent will be set as your profile picture.");
+            }
+
             break;
         case 'deactivate':
             $twilio->replySMS("You will no longer receive any messages.");
             break;
         case '?':
-            $email = $account->getEmail($_POST['From']);
+            $email = $info['email'];
 
-            $twilio->replySMS("List of commands:\n\n\"?\" - Display help prompt\n\"DELETE\" - Deactivate account and stop recieving messages\n\"PROFILE\" - Set profile picture to next image recieved\n");
+            $twilio->replySMS("List of commands:\n\n? - Display help prompt\nDELETE - Deactivate account and stop recieving messages\nPROFILE - Set a profile picture by sending an image\n");
             $twilio->replySMS("Your email is currently set to \"$email\", reply with another email address to update it.");
             break;
         default:
             $twilio->replySMS("Unknown command, reply ? for more info.");
+    }
+}
+
+if ($info['profile'] == '' && $body != 'profile') {
+    if (isset($img_id)) {
+        $account->updateProfile($_POST['From'], $img_id);
+        $twilio->replySMS("Your profile picture has now been updated.");
+    } else {
+        $twilio->replySMS("You do not have a profile picture set, send a picture to set it.");
     }
 }
 
