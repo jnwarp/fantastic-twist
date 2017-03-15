@@ -46,7 +46,7 @@ if (preg_match($regex, $body, $email)) {
         case '?':
             $email = $account->getEmail($_POST['From']);
 
-            $twilio->replySMS("List of commands:\n? - Show this prompt\nDEACTIVATE - Deactivate account and stop recieving messages\nPROFILE - Set profile picture to next image recieved\n");
+            $twilio->replySMS("List of commands:\n\n\"?\" - Display help prompt\n\"DELETE\" - Deactivate account and stop recieving messages\n\"PROFILE\" - Set profile picture to next image recieved\n");
             $twilio->replySMS("Your email is currently set to \"$email\", reply with another email address to update it.");
             break;
         default:
