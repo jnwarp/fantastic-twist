@@ -3,4 +3,7 @@ resources/config.php
 
 # ignore php composer files
 vendor/
-composer.lock
+
+# ignore uploads folder
+!resources/uploads/README.txt
+resources/uploads/

@@ -7,5 +7,9 @@ $config = [
         'database' => 'selfie',
         'username' => 'selfie',
         'password' => ''
+    ],
+    'twilio' => [
+        'sid' => '',
+        'token' => ''
     ]
 ];
