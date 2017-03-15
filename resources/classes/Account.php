@@ -21,7 +21,7 @@ class Account
             );
         } else {
             $connect->simpleInsert(
-                'media',
+                'account',
                 [
                     'phone' => $phone,
                     'email' => $email
