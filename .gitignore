@@ -5,5 +5,6 @@ resources/config.php
 vendor/
 
 # ignore uploads folder
+!resources/uploads/
+resources/uploads/*
 !resources/uploads/README.txt
-resources/uploads/
