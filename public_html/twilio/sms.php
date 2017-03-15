@@ -2,6 +2,8 @@
 include(dirname(__FILE__) . '/../../resources/prepend.php');
 
 $log = new Log();
+$twilio = new Twilio();
+$account = new Account();
 
 // log a failure and quit
 if (isset($_GET['fail'])) {
@@ -29,17 +31,22 @@ $regex = '/[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})/'
 if (preg_match($regex, $body, $email)) {
     // update the email account
     $email = $email[0];
-    $account = new Account();
     $account->updateEmail($_POST['From'], $email);
 
-    $twilio = new Twilio();
-    $twilio->postReply("Email updated to \"$email\", reply HELP for more information");
+    $twilio->replySMS("Email updated to \"$email\", reply HELP for more information");
 } else {
     switch(strtolower($body)) {
         case 'profile':
             $account->updateProfile($_POST['From'], $media_sid);
+            $twilio->replySMS("Your profile picture has now been updated.");
+            break;
+        case 'stop':
+            $twilio->replySMS("You will no longer receive any messages.");
             break;
         default:
-            // unknown command
+            $twilio->replySMS("Unknown command. Reply HELP for more info or STOP to stop receiving messages.");
     }
 }
+
+// send a response back
+$twilio->postReply();
