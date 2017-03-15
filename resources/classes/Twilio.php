@@ -45,7 +45,7 @@ class Twilio
 
         // create an XML body
         $body = '<?xml version="1.0" encoding="UTF-8"?>' . "\n<Response>\n";
-        foreach ($message in $this->replies) {
+        foreach ($this->replies as $message) {
             $body = $body . "    <Message>$message</Message>\n";
         }
         $body = $body . "</Response>\n";
