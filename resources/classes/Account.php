@@ -12,6 +12,7 @@ class Account
     {
         $connect = new Connect();
         if ($connect->simpleSelectCount('account', 'phone', $phone)) {
+            echo 'simple update';
             $connect->simpleUpdate(
                 'account',
                 'email',
@@ -20,11 +21,13 @@ class Account
                 $phone
             );
         } else {
+            echo 'simple insert';
             $connect->simpleInsert(
                 'account',
                 [
                     'phone' => $phone,
-                    'email' => $email
+                    'email' => $email,
+                    'profile' => ''
                 ]
             );
         }

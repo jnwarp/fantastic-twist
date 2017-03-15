@@ -28,7 +28,7 @@ $regex = '/[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})/'
 // check if body contains email
 if (preg_match($regex, $body, $email)) {
     $account = new Account();
-    $account->updateEmail($_POST['From'], $email);
+    $account->updateEmail($_POST['From'], $email[0]);
 } else {
     switch(strtolower($body)) {
         case 'profile':
