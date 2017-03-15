@@ -17,7 +17,7 @@ if (isset($_POST['NumMedia']) && $_POST['NumMedia'] > 0) {
     $media = new Media();
 
     // add each image to database
-    for ($i = 0; $i < int($_POST['NumMedia']), $i++) {
+    for ($i = 0; $i < intval($_POST['NumMedia']); $i++) {
         $media->addMedia($_POST['From'], $_POST["MediaUrl$i"]);
     }
 }

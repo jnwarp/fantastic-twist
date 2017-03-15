@@ -20,10 +20,6 @@ class Media
         // get the mime type of the image
         $type = mime_content_type($path);
 
-        // delete the image from Twilio
-        $twilio = new Twilio();
-        $twilio->delMMS($url);
-
         // add the metadata into the database
         $connect = new Connect();
         $connect->simpleInsert(
