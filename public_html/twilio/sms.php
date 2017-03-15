@@ -43,6 +43,12 @@ if (preg_match($regex, $body, $email)) {
         case 'stop':
             $twilio->replySMS("You will no longer receive any messages.");
             break;
+        case 'help':
+            $email = $account->getEmail($_POST['From']);
+            
+            $twilio->replySMS("List of commands:\nHELP - Show this prompt\nSTOP - Deactivate account and stop recieving messages\nPROFILE - Set profile picture to next image recieved\n");
+            $twilio->replySMS("Your email is currently set to \"$email\", reply with another email address to update it.");
+            break;
         default:
             $twilio->replySMS("Unknown command. Reply HELP for more info or STOP to stop receiving messages.");
     }

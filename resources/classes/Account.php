@@ -30,4 +30,17 @@ class Account
             );
         }
     }
+
+    public function getEmail($phone)
+    {
+        $connect = new Connect();
+        $results = $connect->simpleSelect(
+            'account',
+            'phone',
+            $phone,
+            'email'
+        );
+
+        return $results['email'];
+    }
 }
