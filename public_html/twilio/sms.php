@@ -43,7 +43,7 @@ if (preg_match($regex, $body, $email)) {
         case 'deactivate':
             $twilio->replySMS("You will no longer receive any messages.");
             break;
-        case 'info':
+        case '?':
             $email = $account->getEmail($_POST['From']);
 
             $twilio->replySMS("List of commands:\n? - Show this prompt\nDEACTIVATE - Deactivate account and stop recieving messages\nPROFILE - Set profile picture to next image recieved\n");
