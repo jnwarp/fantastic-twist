@@ -13,7 +13,7 @@ class Event
 
         // custom query to get events
         $result = $connect->query(
-            "SELECT * FROM `events` WHERE `date` > NOW() LIMIT 3;"
+            "SELECT * FROM `events` WHERE `date` > NOW() ORDER BY `date` LIMIT 3;"
         );
 
         // create a table for each event

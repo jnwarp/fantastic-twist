@@ -98,8 +98,9 @@ class Command
         if ($result !== []) {
             $temp = "Upcoming events:\n\n";
             foreach ($result as $row) {
-                $temp = $temp . substr($row['date'], 0, 16) .
-                    ' - ' . $row['name'] . "\n";
+                $temp = $temp . '[' . substr($row['date'], 0, 16) . ']' .
+                    ' ' . $row['name'] .
+                    ' (' . $row['points'] . " pts)\n";
             }
             $this->twilio->replySMS($temp);
         } else {
