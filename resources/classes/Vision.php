@@ -30,8 +30,8 @@ class Vision
 EOT;
 
         // create the url request
-    		$curl = curl_init();
-    		curl_setopt($curl, CURLOPT_URL,
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL,
             'https://vision.googleapis.com/v1/images:annotate?key=' .
             $config['vision']['api_key']
         );
@@ -42,7 +42,7 @@ EOT;
         curl_setopt($curl, CURLOPT_POSTFIELDS, $request);
 
         // send the request
-        $result = curl_exec($curl);
+        $result = json_decode(curl_exec($curl), true);
         $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
 

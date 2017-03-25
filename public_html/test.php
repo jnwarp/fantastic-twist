@@ -1,9 +1,5 @@
 <?php
 include(dirname(__FILE__) . '/../resources/prepend.php');
 
-exit();
-$url = '';
-$phone = '+1';
-
-$media = new Media();
-$media->addMedia($phone, $url);
+$command = new Command('', '+');
+echo json_encode($command->vision('58d6aac2a8bf9'));

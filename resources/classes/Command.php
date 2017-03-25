@@ -160,8 +160,7 @@ class Command
         $vision = new Vision();
         $result = $vision->detectText($image_data);
 
-        // output the debug data
-        $this->twilio->replySMS("Image processed:\n\n$result");
+        echo "Detected text: " . json_encode($result['responses']);
 
         return $result;
     }
