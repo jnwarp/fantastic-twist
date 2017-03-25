@@ -150,10 +150,11 @@ class Command
         $this->twilio->replySMS("For more information, try typing \"?\" or \"COMMANDS\".");
     }
 
-    public function vision($img_api)
+    public function vision($img_id)
     {
         // load the image data as base64
-        $image_data = $this->media->getMedia($img_api);
+        $media = new Media();
+        $image_data = $media->getMedia($img_id);
 
         // send image to vision api
         $vision = new Vision();
@@ -161,5 +162,7 @@ class Command
 
         // output the debug data
         $this->twilio->replySMS("Image processed:\n\n$result");
+
+        return $result;
     }
 }
