@@ -8,6 +8,17 @@ class Account
 
     }
 
+    public function deleteAccount($phone)
+    {
+        $connect = new Connect();
+        $connect->simpleDelete(
+            'account',
+            'phone',
+            $phone
+        );
+        $connect->close();
+    }
+
     public function updateEmail($phone, $email)
     {
         $connect = new Connect();

@@ -33,6 +33,18 @@ if (substr($body, 0, 5) == 'email') {
 } else {
     // command block
     switch (strtolower($body)) {
+        case 'delete':
+            $command->delete();
+            break;
+
+        case 'delete confirm':
+            $command->deleteconfirm();
+            break;
+            
+        case 'commands':
+            $command->commands();
+            break;
+
         case 'points':
             $command->points();
             break;

@@ -38,7 +38,7 @@ class Command
                 if ($this->info['events'] == "") {
                     $events = [$code];
                 } else {
-                    $events[] += $code;
+                    $events[] = $code;
                 }
 
                 // sign into this event
@@ -55,12 +55,18 @@ class Command
 
     public function commands()
     {
-
+        $this->twilio->replySMS("A full list of commands is available here: https://git.io/vSki6");
     }
 
     public function delete()
     {
+        $this->twilio->replySMS("Are you sure you want to delete your account? All point event logs will be cleared.\n\nReply \"DELETE CONFIRM\" if you are sure you want to do this.");
+    }
 
+    public function deleteconfirm()
+    {
+        $this->account->deleteAccount($this->phone);
+        $this->twilio->replySMS("Your account has been deleted. Images and message logs still remain on the server. (WIP)");
     }
 
     public function email()
