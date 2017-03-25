@@ -159,19 +159,19 @@ class Command
         // send image to vision api
         $vision = new Vision();
         $result = $vision->detectText($image_data);
-        $text = $result['responses'][0]['fullTextAnnotation']['text']);
+        $text = $result['responses'][0]['fullTextAnnotation']['text'];
 
         // check for a valid code
         $keyword = explode(' ', $text);
 
         foreach ($keyword as $code) {
-            $result = $this->event->loadEvent($code);
+            $event = $this->event->loadEvent($code);
 
-            if ($result !== []) {
+            if ($event !== []) {
                 $this->code($code);
             }
         }
 
-        return $result['responses'][0]['fullTextAnnotation']['text']);
+        return $result['responses'][0]['fullTextAnnotation']['text'];
     }
 }
