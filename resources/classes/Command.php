@@ -57,7 +57,7 @@ class Command
                     $result['points'] + $this->info['points']
                 );
 
-                $this->twilio->replySMS("You have sucessfully signed in! You now have " . ($result['points'] + $this->info['points']) . " points.");
+                $this->twilio->replySMS("You have sucessfully signed in! You now have " . ($result['points'] + $this->info['points']) . " point(s).");
             }
         }
     }
@@ -131,7 +131,7 @@ class Command
 
         // display a different message if profile is cleared
         if ($img_id == '') {
-            $twilio->replySMS("The next image sent will be set as your profile picture.");
+            $this->twilio->replySMS("The next image sent will be set as your profile picture.");
         } else {
             $this->twilio->replySMS("Your profile picture has been updated.");
         }

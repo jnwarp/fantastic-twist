@@ -42,6 +42,7 @@ class Account
                 ]
             );
         }
+        $connect->close();
     }
 
     public function updateEvents($phone, $events, $points)
@@ -85,6 +86,7 @@ class Account
                 ]
             );
         }
+        $connect->close();
     }
 
     public function getInfo($phone)
@@ -95,6 +97,7 @@ class Account
             'phone',
             $phone
         );
+        $connect->close();
 
         return $results;
     }
