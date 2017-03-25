@@ -67,4 +67,4 @@ if (substr($body, 0, 5) == 'email') {
 }
 
 // send a response back
-$twilio->postReply();
+$command->postReply();

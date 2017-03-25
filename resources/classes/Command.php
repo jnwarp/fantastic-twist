@@ -88,6 +88,11 @@ class Command
 
     }
 
+    public function postReply()
+    {
+        $this->twilio->postReply();
+    }
+
     public function privacy()
     {
 
