@@ -93,7 +93,18 @@ class Command
 
     public function events()
     {
+        $result = $this->event->listEvents();
 
+        if ($result !== []) {
+            $temp = "Upcoming events:\n";
+            foreach ($result as $row) {
+                $temp = $temp . $row['name'] . ' on ' . $row['date'] .
+                    ' (' . $row['points'] . " points)\n";
+            }
+            $this->twilio->replySMS($temp);
+        } else {
+            $this->twilio->replySMS("There are no upcoming events scheduled, check back later!");
+        }
     }
 
     public function github()

@@ -7,6 +7,25 @@ class Event
 
     }
 
+    public function listEvents($code)
+    {
+        $connect = new Connect();
+
+        // custom query to get events
+        $result = $connect->query(
+            "SELECT * FROM `events` WHERE `date` > NOW() LIMIT 3;"
+        );
+
+        // create a table for each event
+        $table = [];
+        while ($row = $result->fetch_assoc()) {
+            $table[] = $row;
+        }
+
+        $connect->close();
+        return $table;
+    }
+
     public function loadEvent($code)
     {
         $connect = new Connect();
