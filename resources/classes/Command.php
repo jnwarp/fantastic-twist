@@ -89,7 +89,7 @@ class Command
 
     public function github()
     {
-        $this->twilio->replySMS("The code for Selfie Sign-In is licensed under the MIT License and is available on GitHub here:\nhttps://github.com/jnwarp/fantastic-twist");
+        $this->twilio->replySMS("Selfie Sign-In is licensed under the MIT License, view or download the code:\nhttps://github.com/jnwarp/fantastic-twist");
     }
 
     public function points()
