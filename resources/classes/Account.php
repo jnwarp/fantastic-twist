@@ -37,7 +37,7 @@ class Account
                     'phone' => $phone,
                     'email' => $email,
                     'events' => '',
-                    'profile' => '',
+                    'profile' => '*',
                     'points' => 0
                 ]
             );

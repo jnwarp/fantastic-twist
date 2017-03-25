@@ -102,11 +102,6 @@ class Command
         $this->twilio->postReply();
     }
 
-    public function privacy()
-    {
-
-    }
-
     public function profile()
     {
 
@@ -116,7 +111,7 @@ class Command
     {
         $this->twilio->replySMS(
             "Welcome to Selfie Sign-In! Getting started is easy, just follow these steps:\n\n" .
-            "1. Reply \"EMAIL zyz123@psu.edu\" to set your email\n" .
+            "1. Reply \"EMAIL xyz5000@psu.edu\" to set your email\n" .
             "2. Reply \"PROFILE\" to set your profile (optional)\n" .
             "3. Take a picture of the sign in code to sign in\n"
         );
