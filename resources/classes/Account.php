@@ -31,6 +31,26 @@ class Account
         }
     }
 
+    public funciton updateEvents($phone, $events, $points)
+    {
+        $connect = new Connect();
+        $connect->simpleUpdate(
+            'account',
+            'events',
+            $events,
+            'phone',
+            $phone
+        );
+        $connect->simpleUpdate(
+            'account',
+            'points',
+            $points,
+            'phone',
+            $phone
+        );
+        $connect->close();
+    }
+
     public function updateProfile($phone, $img_id)
     {
         $connect = new Connect();
