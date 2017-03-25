@@ -23,16 +23,16 @@ if (isset($_POST['NumMedia']) && $_POST['NumMedia'] > 0) {
 }
 
 $command = new Command($_POST['Body'], $_POST['From']);
-$body = $_POST['Body'];
+$body = strtolower($_POST['Body']);
 
 // set a new email address
 if (substr($body, 0, 5) == 'email') {
     $command->email();
-} elseif (strtolower(substr($body, 0, 4)) == 'code') {
-    $command->code(substr($body, 5));
+} elseif (substr($body, 0, 4) == 'code') {
+    $command->code(substr($_POST['Body'], 5));
 } else {
     // command block
-    switch (strtolower($body)) {
+    switch ($body) {
         case 'delete':
             $command->delete();
             break;
@@ -40,7 +40,7 @@ if (substr($body, 0, 5) == 'email') {
         case 'delete confirm':
             $command->deleteconfirm();
             break;
-            
+
         case 'commands':
             $command->commands();
             break;
