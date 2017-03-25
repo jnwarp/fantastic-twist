@@ -96,10 +96,10 @@ class Command
         $result = $this->event->listEvents();
 
         if ($result !== []) {
-            $temp = "Upcoming events:\n";
+            $temp = "Upcoming events:\n\n";
             foreach ($result as $row) {
-                $temp = $temp . $row['name'] . ' on ' . $row['date'] .
-                    ' (' . $row['points'] . " points)\n";
+                $temp = $temp . substr($row['date'], 0, 16) .
+                    ' - ' . $row['name'] . "\n";
             }
             $this->twilio->replySMS($temp);
         } else {
