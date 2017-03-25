@@ -23,11 +23,12 @@ if (isset($_POST['NumMedia']) && $_POST['NumMedia'] > 0) {
 }
 
 $command = new Command($_POST['Body'], $_POST['From']);
+$body = $_POST['Body'];
 
 // set a new email address
 if (substr($body, 0, 5) == 'email') {
     $command->email();
-} elseif (strtolower(substr($body, 0, 4))) == 'code') {
+} elseif (strtolower(substr($body, 0, 4)) == 'code') {
     $command->code(substr($body, 5));
 } else {
     // command block

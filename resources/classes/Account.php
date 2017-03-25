@@ -31,7 +31,7 @@ class Account
         }
     }
 
-    public funciton updateEvents($phone, $events, $points)
+    public function updateEvents($phone, $events, $points)
     {
         $connect = new Connect();
         $connect->simpleUpdate(

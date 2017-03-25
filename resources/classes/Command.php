@@ -14,7 +14,7 @@ class Command
         $this->twilio = new Twilio();
         $this->account = new Account();
         $this->event = new Event();
-        $this->info = $account->getInfo($phone);
+        $this->info = $this->account->getInfo($phone);
         $this->phone = $phone;
         $this->body = strtolower($body);
     }
@@ -35,17 +35,20 @@ class Command
                 $this->twilio->replySMS("Error: You already signed in to this event.");
             } else {
                 // add a new event onto the list
-                $events = explode(', ', $this->info['events']);
-                $events[] = $code;
+                if ($this->info['events'] == "") {
+                    $events = [$code];
+                } else {
+                    $events[] += $code;
+                }
 
                 // sign into this event
                 $this->account->updateEvents(
-                    $code,
+                    $this->phone,
                     implode(', ', $events),
                     $result['points'] + $this->info['points']
                 );
 
-                $this->twilio->replySMS("You have sucessfully signed in! You now have " . $this->info['points'] . " points.");
+                $this->twilio->replySMS("You have sucessfully signed in! You now have " . ($result['points'] + $this->info['points']) . " points.");
             }
         }
     }
