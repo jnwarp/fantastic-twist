@@ -116,9 +116,9 @@ class Command
     {
         $this->twilio->replySMS(
             "Welcome to Selfie Sign-In! Getting started is easy, just follow these steps:\n\n" .
-            "1. Reply \"EMAIL zyz123@psu.edu\" to set your email" .
-            "2. Reply \"PROFILE\" to set your profile (optional)" .
-            "3. Take a picture of the sign in code to sign in"
+            "1. Reply \"EMAIL zyz123@psu.edu\" to set your email\n" .
+            "2. Reply \"PROFILE\" to set your profile (optional)\n" .
+            "3. Take a picture of the sign in code to sign in\n"
         );
         $this->twilio->replySMS("For more information, try typing \"?\" or \"COMMANDS\".");
     }
