@@ -45,6 +45,10 @@ if (substr($body, 0, 5) == 'email') {
             $command->deleteconfirm();
             break;
 
+        case 'events':
+            $command->events();
+            break;
+
         case 'github':
             $command->github();
             break;
