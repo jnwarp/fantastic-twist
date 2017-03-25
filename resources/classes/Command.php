@@ -102,9 +102,19 @@ class Command
         $this->twilio->postReply();
     }
 
-    public function profile()
+    public function profile($img_id, $req_blank = false)
     {
+        // exit if blank is required
+        if ($req_blank && $this->info['profile'] != '') return false;
+        
+        $this->account->updateProfile($this->phone, $img_id);
 
+        // display a different message if profile is cleared
+        if ($img_id == '') {
+            $twilio->replySMS("The next image sent will be set as your profile picture.");
+        } else {
+            $this->twilio->replySMS("Your profile picture has now been updated.");
+        }
     }
 
     public function start()

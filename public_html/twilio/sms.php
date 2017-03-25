@@ -55,11 +55,9 @@ if (substr($body, 0, 5) == 'email') {
 
         case 'profile':
             if (isset($img_id)) {
-                $account->updateProfile($_POST['From'], $img_id);
-                $twilio->replySMS("Your profile picture has now been updated.");
+                $command->profile($img_id);
             } else {
-                $account->updateProfile($_POST['From'], '');
-                $twilio->replySMS("The next image sent will be set as your profile picture.");
+                $command->profile('');
             }
             break;
 
@@ -73,7 +71,9 @@ if (substr($body, 0, 5) == 'email') {
             $twilio->replySMS("Your email is currently set to \"$email\", reply with another email address to update it.");
             break;
         case '':
-
+            if (isset($img_id)) {
+                $command->profile($img_id, true);
+            }
             break;
         default:
             $twilio->replySMS("Unknown command, reply ? for more info.");
