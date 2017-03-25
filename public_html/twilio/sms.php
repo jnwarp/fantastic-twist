@@ -33,6 +33,10 @@ if (substr($body, 0, 5) == 'email') {
 } else {
     // command block
     switch (strtolower($body)) {
+        case 'points':
+            $command->points();
+            break;
+
         case 'profile':
             if (isset($img_id)) {
                 $account->updateProfile($_POST['From'], $img_id);

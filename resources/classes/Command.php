@@ -88,7 +88,7 @@ class Command
 
     public function points()
     {
-
+        $this->twilio->replySMS("You have " . $this->info['points'] . " points.");
     }
 
     public function postReply()
