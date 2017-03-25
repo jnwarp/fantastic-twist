@@ -28,6 +28,15 @@ class Command
 
         if ($result === []) {
             $this->twilio->replySMS("Error: Unknown code, please try again.");
+        } elseif (
+            date_add(
+                date_create($result['date']),
+                date_interval_create_from_date_string(
+                    $result['valid_for'] .' minutes'
+                )
+            ) < date_create('now')
+        ) {
+            $this->twilio->replySMS("Error: This event is already over, sorry.");
         } else {
             $events = explode(', ', $this->info['events']);
 
