@@ -11,5 +11,8 @@ $config = [
     'twilio' => [
         'sid' => '',
         'token' => ''
+    ],
+    'vision' => [
+        'api_key' => ''
     ]
 ];

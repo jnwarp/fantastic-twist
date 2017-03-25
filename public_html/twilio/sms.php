@@ -16,8 +16,8 @@ if (isset($_GET['fail'])) {
 if (isset($_POST['NumMedia']) && $_POST['NumMedia'] > 0) {
     $media = new Media();
 
-    // add each image to database
     for ($i = 0; $i < intval($_POST['NumMedia']); $i++) {
+        // add image to database
         $img_id = $media->addMedia($_POST['From'], $_POST["MediaUrl$i"]);
     }
 }
@@ -69,20 +69,23 @@ if (substr($body, 0, 5) == 'email') {
             $command->start();
             break;
 
-        case 'deactivate':
-            $twilio->replySMS("You will no longer receive any messages.");
-            break;
         case '?':
             $email = $info['email'];
 
             $twilio->replySMS("List of commands:\n\n? - Display help prompt\nDELETE - Deactivate account and stop recieving messages\nPROFILE - Set a profile picture by sending an image\n");
             $twilio->replySMS("Your email is currently set to \"$email\", reply with another email address to update it.");
             break;
+
         case '':
             if (isset($img_id)) {
-                $command->profile($img_id, true);
+                // try updating the profile picture
+                if (!$command->profile($img_id, true)) {
+                    // not profile picture, send data to vision api
+                    $command->vision($img_id);
+                }
             }
             break;
+
         default:
             $twilio->replySMS("Unknown command, reply ? for more info.");
 

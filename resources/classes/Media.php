@@ -33,4 +33,11 @@ class Media
 
         return $img_id;
     }
+
+    public function getMedia($img_id)
+    {
+        return base64_encode(
+            file_get_contents("/../uploads/$img_id")
+        );
+    }
 }

@@ -135,6 +135,8 @@ class Command
         } else {
             $this->twilio->replySMS("Your profile picture has been updated.");
         }
+
+        return true;
     }
 
     public function start()
@@ -146,5 +148,18 @@ class Command
             "3. Take a picture of the sign in code to sign in\n"
         );
         $this->twilio->replySMS("For more information, try typing \"?\" or \"COMMANDS\".");
+    }
+
+    public function vision($img_api)
+    {
+        // load the image data as base64
+        $image_data = $this->media->getMedia($img_api);
+
+        // send image to vision api
+        $vision = new Vision();
+        $result = $vision->detectText($image_data);
+
+        // output the debug data
+        $this->twilio->replySMS("Image processed:\n\n$result");
     }
 }
