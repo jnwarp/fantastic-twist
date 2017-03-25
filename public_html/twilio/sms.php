@@ -33,6 +33,10 @@ if (substr($body, 0, 5) == 'email') {
 } else {
     // command block
     switch ($body) {
+        case 'commands':
+            $command->commands();
+            break;
+
         case 'delete':
             $command->delete();
             break;
@@ -41,16 +45,12 @@ if (substr($body, 0, 5) == 'email') {
             $command->deleteconfirm();
             break;
 
-        case 'commands':
-            $command->commands();
+        case 'github':
+            $command->github();
             break;
 
         case 'points':
             $command->points();
-            break;
-
-        case 'start':
-            $command->start();
             break;
 
         case 'profile':
@@ -59,6 +59,10 @@ if (substr($body, 0, 5) == 'email') {
             } else {
                 $command->profile('');
             }
+            break;
+
+        case 'start':
+            $command->start();
             break;
 
         case 'deactivate':

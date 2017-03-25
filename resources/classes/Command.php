@@ -89,7 +89,7 @@ class Command
 
     public function github()
     {
-
+        $this->twilio->replySMS("The code for Selfie Sign-In is licensed under the MIT License and is available on GitHub here:\nhttps://github.com/jnwarp/fantastic-twist")
     }
 
     public function points()
@@ -106,14 +106,14 @@ class Command
     {
         // exit if blank is required
         if ($req_blank && $this->info['profile'] != '') return false;
-        
+
         $this->account->updateProfile($this->phone, $img_id);
 
         // display a different message if profile is cleared
         if ($img_id == '') {
             $twilio->replySMS("The next image sent will be set as your profile picture.");
         } else {
-            $this->twilio->replySMS("Your profile picture has now been updated.");
+            $this->twilio->replySMS("Your profile picture has been updated.");
         }
     }
 
