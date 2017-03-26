@@ -32,7 +32,7 @@ class Command
             date_add(
                 date_create($result['date']),
                 date_interval_create_from_date_string(
-                    $result['valid_for'] .' minutes'
+                    $result['valid_for'] . ' minutes'
                 )
             ) < date_create('now')
         ) {
@@ -162,7 +162,13 @@ class Command
         $text = $result['responses'][0]['fullTextAnnotation']['text'];
 
         // check for a valid code
-        $keyword = explode(' ', $text);
+        $keyword = explode('\n', $text);
+
+        $log = new Log();
+        $log->logEvent('VISION', json_encode([
+            'keywords' => $keyword,
+            'phone' => $this->phone
+        ]));
 
         foreach ($keyword as $code) {
             $event = $this->event->loadEvent($code);
