@@ -162,7 +162,7 @@ class Command
         $text = $result['responses'][0]['fullTextAnnotation']['text'];
 
         // check for a valid code
-        $keyword = explode('\n', $text);
+        $keyword = explode("\n", $text);
 
         $log = new Log();
         $log->logEvent('VISION', json_encode([
